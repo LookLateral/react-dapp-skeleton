@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Home from './core/Home'
+import Provenance from './core/Provenance'
+import Fimart from './core/Fimart'
 import Users from './user/Users'
 import Signup from './user/Signup'
 import Signin from './auth/Signin'
@@ -35,6 +37,8 @@ class MainRouter extends Component {
       <Menu/>
       <Switch>
         <Route exact path="/" component={Home}/>
+        <Route exact path="/provenance" component={Provenance}/>
+        <Route exact path="/fimart" component={Fimart}/>
         <Route path="/users" component={Users}/>
         <Route path="/signup" component={Signup}/>
         <Route path="/signin" component={Signin}/>
