@@ -49,7 +49,8 @@ class Home extends Component {
     })
   }
   render() {
-    const {classes} = this.props
+    const {classes} = this.props    
+    console.log("style in home component\n"+ JSON.stringify(classes))
     return (
       <div className={classes.root}>
             <Typography type="headline"
