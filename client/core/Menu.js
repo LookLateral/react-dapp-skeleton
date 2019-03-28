@@ -18,7 +18,7 @@ import cart from './../cart/cart-helper'*/
 import Logo from '../assets/images/Logo-Look-Lateral2.png';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import IconSandwich from './IconSandwich'
+import IconSandwich from '../components/IconSandwich'
 
 
 /*const isActive = (history, path) => {

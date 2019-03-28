@@ -14,7 +14,7 @@ import Categories from './../product/Categories'
 
 // SIMON: added
 import BackgroundLeft from '../assets/images/image-home-sx.jpg';
-import WPContent from './WPcontent';
+import WPContent from '../components/WPcontent';
 import auth from './../auth/auth-helper'
 import { Link } from 'react-router-dom'
 //import Button from '@material-ui/core/Button'
@@ -58,9 +58,10 @@ const styles = {
   subtitle: {
     fontSize: 36, marginBottom: 30,
     color: 'rgb(255,255,255,0.9)',   
+    lineHeight: 1,
   },
   textNormal: {
-    fontSize: 24, marginBottom: 30,
+    fontSize: 24, marginBottom: 30, fontWeight: 600,
   },
   blu: {
     color: '#0000FF',   
@@ -69,14 +70,33 @@ const styles = {
     fontSize: 20, color: 'rgb(255,255,255,0.6)', 
     marginBottom: 10, marginTop: 40, 
   },
-  linkAroundBtn: { textDecoration: 'none', }, 
-  borderedBtn: {
+  //linkAroundBtn: { textDecoration: 'none', }, 
+  /*borderedBtn: {
     color: '#fff', fontSize: 15, marginTop:40,
     borderStyle: 'solid', borderColor: '#fff', borderRadius: 4, border: 2,
-  },
+  },*/
   fullBtn: {
-    color: '#fff', fontSize: 15, marginTop:40,
-    borderStyle: 'solid', backgroundColor: 'purple', borderRadius: 4,
+    fontSize: 15, marginTop:40,
+    borderStyle: 'solid', borderRadius: 4,
+    width: 150, padding: 15,
+  },
+  btnpurple: {
+    backgroundColor: 'purple', color: '#fff', opacity: 0.9,
+  },
+  btnblu: {
+    backgroundColor: 'blue', color: '#fff', opacity: 0.9,
+  },
+  btngreen: {
+    backgroundColor: 'green', color: '#fff', opacity: 0.9,
+  },
+  btnround: {
+    borderRadius: 16, width: 200, 
+  },
+  linkTandC: {
+    color: '#bbb5b5',
+    textDecoration: 'underline',
+    fontStyle: 'italic',
+    fontSize: 20,
   },
 }
 
@@ -86,41 +106,23 @@ const isActive = (history, path) => {
   else
     return {color: '#ffffff'}
 }
-const isPartActive = (history, path) => {
+/*const isPartActive = (history, path) => {
   if (history.location.pathname.includes(path))
     return {color: '#bef67a'}
   else
     return {color: '#ffffff'}
-}
+}*/
 
 class Home extends Component {
 //const Menu = withRouter(({history}) => (
   
-state={
-    //suggestionTitle: "Latest Products",
-    //suggestions: [],
-    //categories: [],
+  state={
     wpcategories: []
   }
-  componentDidMount = () => {
-    /*listLatest().then((data) => {
-      if (data.error) {
-        console.log(data.error)
-      } else {
-        this.setState({suggestions: data})
-      }
-    })
-    listCategories().then((data) => {
-      if (data.error) {
-        console.log(data.error)
-      } else {
-        this.setState({categories: data})
-      }
-    })*/
-  }
+  
+  componentDidMount = () => { /* deprecated */ }
 
   componentWillMount () {     
-
     let dataURL = "http://blog.looklateral.com/wp-json/wp/v2/platformcategories?_embed"; 
     fetch (dataURL) 
       .then (res => res.json ()) 
@@ -131,32 +133,16 @@ state={
 
 
   render() {
-    const {classes} = this.props
-    const {history} = this.props
-    const {mainState} = this.props
+    const {classes, history, mainState} = this.props
     
     //console.log("style in home component\n"+ JSON.stringify(classes))
     return (
       <div className={classes.root}>
-         { /*    grid removed
-            <Typography type="headline"
-                        component="h2"
-                        className={classes.title}>
-              LOOK LATERALs HOME PAGE
-            </Typography>
-        <Grid container spacing={24}>
-          <Grid item xs={8} sm={8}>
-            <Search categories={this.state.categories}/>
-            <Categories categories={this.state.categories}/>
-          </Grid>
-          <Grid item xs={4} sm={4}>
-            <Suggestions products={this.state.suggestions} title={this.state.suggestionTitle}/>
-          </Grid>
-        </Grid> */ }
 
         <Grid container spacing={0}>
          
-         <Grid item xs={12} sm={12} md={6}>
+         { /*SIMON: probably need to remove height prop later*/ }
+         <Grid item xs={12} sm={12} md={6} style={{ height: mainState.viewport.height + 'px'}}>
              <Card className={classes.card}>           
                <CardContent className={classes.cardContent1} >
                  
@@ -168,20 +154,44 @@ state={
 
                    <Typography className={classes.textNormal+' '+classes.blu}>
                        Blockchain-Powered Art
-                   </Typography>            
+                   </Typography>   
+
+                    <div>
+                    <Link to="/how-it-works">
+                      <Button 
+                          className={classes.fullBtn+' '+classes.btngreen+' '+classes.btnround} 
+                      >How it works</Button>
+                    </Link>      
+                    </div>
 
                    { 
                     !auth.isAuthenticated() && (<span>
+                      <div>
                       <Link to="/signup">
-                        <Button style={isActive(history, "/signup")}>Sign up
-                        </Button>
+                        <Button 
+                            className={classes.fullBtn+' '+classes.btnpurple} 
+                            style={isActive(history, "/signup")}
+                        >Sign up</Button>
                       </Link>
+                      </div>
+
+                      <div>
                       <Link to="/signin">
-                        <Button style={isActive(history, "/signin")}>Sign In
-                        </Button>
+                        <Button 
+                            className={classes.fullBtn+' '+classes.btnblu} 
+                            style={isActive(history, "/signin")}
+                        >Sign In</Button>
                       </Link>
+                      </div>
                     </span>)
-                  }                 
+                  }         
+
+
+                  <div style={{ marginTop: 40}}>
+                  <Link to="/terms-conditions" className={classes.linkTandC}>
+                    Terms and conditions
+                  </Link>
+                  </div>        
                  
                </CardContent>
              </Card>

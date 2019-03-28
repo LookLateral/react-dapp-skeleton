@@ -9,7 +9,7 @@ const styles = {
         fontSize: '2em',
         position: 'absolute',
         right: 0,
-        top:32 
+        top: 0 
     },
 }
 

@@ -22,6 +22,7 @@ import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
 import Order from './order/Order'
+import Sidebar from './components/Sidebar'
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -46,12 +47,15 @@ class MainRouter extends Component {
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles)
     }
-
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillMount () {     
+  componentWillUnmount() { 
+    window.removeEventListener('resize', this.resize); 
+  }
 
+  // check the actual viewport to resize the home
+  componentWillMount () {     
     if(this.state.viewport.width !== document.documentElement.clientWidth){
       this.setState({
         viewport: {
@@ -61,8 +65,6 @@ class MainRouter extends Component {
       }); 
     }
   }
-
-  componentWillUnmount() { window.removeEventListener('resize', this.resize); }
 
   resize = () => {
     if(this.state.viewport.width !== document.documentElement.clientWidth || this.state.viewport.height !== document.documentElement.clientHeight){
@@ -80,6 +82,7 @@ class MainRouter extends Component {
   }
 
   render() {
+
     return (<div>
       <Menu isOpen={this.state.sidebarOpened} handleSidebar={() => this.handleSidebar()} />
       <Switch>
@@ -108,6 +111,16 @@ class MainRouter extends Component {
 
         <Route path="/seller/stripe/connect" component={StripeConnect}/>
       </Switch>
+      
+      <Sidebar 
+                    isOpen={this.state.sidebarOpened}
+                    // SIMON: DEPRECATED FOR NOW
+                    //userLogged={ this.state.userLogged} 
+                    //userType={ this.state.userType}
+                    //handleLogout={this.handleLogout}
+                /> 
+      { /* SIMON: need to pass history to sidebar to use history.push when signing out */}
+
     </div>)
   }
 }
