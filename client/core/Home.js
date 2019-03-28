@@ -59,6 +59,12 @@ const styles = {
     fontSize: 36, marginBottom: 30,
     color: 'rgb(255,255,255,0.9)',   
   },
+  textNormal: {
+    fontSize: 24, marginBottom: 30,
+  },
+  blu: {
+    color: '#0000FF',   
+  },
   pos: {
     fontSize: 20, color: 'rgb(255,255,255,0.6)', 
     marginBottom: 10, marginTop: 40, 
@@ -74,7 +80,7 @@ const styles = {
   },
 }
 
-/*const isActive = (history, path) => {
+const isActive = (history, path) => {
   if (history.location.pathname === path)
     return {color: '#bef67a'}
   else
@@ -85,7 +91,7 @@ const isPartActive = (history, path) => {
     return {color: '#bef67a'}
   else
     return {color: '#ffffff'}
-}*/
+}
 
 class Home extends Component {
 //const Menu = withRouter(({history}) => (
@@ -125,8 +131,11 @@ state={
 
 
   render() {
-    const {classes} = this.props    
-    console.log("style in home component\n"+ JSON.stringify(classes))
+    const {classes} = this.props
+    const {history} = this.props
+    const {mainState} = this.props
+    
+    //console.log("style in home component\n"+ JSON.stringify(classes))
     return (
       <div className={classes.root}>
          { /*    grid removed
@@ -152,26 +161,27 @@ state={
                <CardContent className={classes.cardContent1} >
                  
                  <div className={classes.spacer}></div>
-
-                 
+             
                    <Typography className={classes.subtitle}>
-                       WELCOME TO LOOK LATERAL's PLATFORM
+                       THE POWER OF ART<br/>FOR EVERYONE
+                   </Typography>
+
+                   <Typography className={classes.textNormal+' '+classes.blu}>
+                       Blockchain-Powered Art
                    </Typography>            
 
                    { 
                     !auth.isAuthenticated() && (<span>
                       <Link to="/signup">
-                        <Button style={{color: '#ffffff'/*isActive(history, "/signup")*/}}>Sign up
+                        <Button style={isActive(history, "/signup")}>Sign up
                         </Button>
                       </Link>
                       <Link to="/signin">
-                        <Button style={{color: '#ffffff'/*isActive(history, "/signin")*/}}>Sign In
+                        <Button style={isActive(history, "/signin")}>Sign In
                         </Button>
                       </Link>
                     </span>)
-                  }
-
-                   
+                  }                 
                  
                </CardContent>
              </Card>
@@ -180,7 +190,7 @@ state={
          <Grid item xs={12} sm={12} md={6}>
              <Card className={classes.card}>           
                <CardContent className={classes.cardContent2}>                  
-                 <WPContent userState={this.state} />       
+                 <WPContent wpCategories={this.state} mainState={mainState} />       
                </CardContent>
              </Card>
          </Grid>

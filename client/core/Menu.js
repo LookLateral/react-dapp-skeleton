@@ -18,6 +18,7 @@ import cart from './../cart/cart-helper'*/
 import Logo from '../assets/images/Logo-Look-Lateral2.png';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import IconSandwich from './IconSandwich'
 
 
 /*const isActive = (history, path) => {
@@ -106,8 +107,9 @@ const styles = {
   },
   AppHeader: {
     height: 150,
-    backgroundColor: '#282c34',
-    opacity: 0.9,
+    //backgroundColor: '#282c34',
+    backgroundColor: 'rgb(0,0,0,0.9) !important',
+    //opacity: 0.9,
     padding: 50,
   },
   linkLogo: {
@@ -146,6 +148,7 @@ const styles = {
 function Menu(props) {
   
   const { classes } = props;
+  const { isOpen } = props;
   
   return (
     <div className={classes.root}>
@@ -157,6 +160,8 @@ function Menu(props) {
             <img src={Logo} className={classes.logo} alt="LL Logo"></img> 
           </div>
           </a>
+
+          <IconSandwich isOpen={isOpen} onClick={() => props.handleSidebar() } />
         </Toolbar>
 
         <Toolbar>

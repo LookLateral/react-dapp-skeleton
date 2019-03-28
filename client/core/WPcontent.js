@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
+//import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
 const styles = {
@@ -22,12 +22,15 @@ const properties = {
 const WPContent = (props) => {
   
     const { classes } = props;
-    const { userState } = props;   
-    let categories = userState.wpcategories.map ((category, index) => {       
-      return <div key={index} /*style={{ height: userState.viewport.height-260 }}*/> 
+    const { wpCategories } = props; 
+    const { mainState } = props; 
+    
+    
+    let categories = wpCategories.wpcategories.map ((category, index) => {       
+      return <div key={index} style={{ height: mainState.viewport.height-260 }}> 
                 <img 
                     src={category._embedded['wp:featuredmedia'][0].media_details.sizes.large.source_url} 
-                    /*height={(userState.viewport.height -260)}*/
+                    height={(mainState.viewport.height -260)}
                     alt={category.acf.category_name} />
                 <span className={classes.spanColored} style={{backgroundColor: category.acf.category_color}}>
                   <a 
