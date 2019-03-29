@@ -27,7 +27,7 @@ const styles = {
 }
 
 const SidebarFastLink = (props) => {  
-    const { classes } = props; 
+    const { classes, history } = props; 
 
     return (
         <div>
@@ -45,9 +45,6 @@ const SidebarFastLink = (props) => {
                     <Link to="/search" className={classes.fastLink}>
                         <FontAwesomeIcon icon={['fas', 'search']}  className={classes.fastLinkImage} />
                     </Link>
-                    {/*<Link to="/logout" className={classes.fastLink}>
-                        <FontAwesomeIcon icon={['fas', 'sign-out-alt']}  className={classes.fastLinkImage} />
-                    </Link>*/}
                     <Button color="inherit" className={classes.fastLink} onClick={() => {
                         auth.signout(() => history.push('/'))
                     }}><FontAwesomeIcon icon={['fas', 'sign-out-alt']}  className={classes.fastLinkImage} /></Button>

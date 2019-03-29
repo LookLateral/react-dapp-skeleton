@@ -4,6 +4,8 @@ import SidebarFastLinks from './SidebarFastLinks'
 import SidebarLinkList from './SidebarLinkList'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import {withRouter} from 'react-router-dom'
+
 
 const styles = {
     sidebar: {
@@ -18,7 +20,8 @@ const styles = {
 }
 
 const Sidebar = (props) => {      
-    const { classes } = props; 
+
+    const { classes, history } = props; 
 
     return (
         props.isOpen ?
@@ -26,7 +29,7 @@ const Sidebar = (props) => {
              
                 <SidebarUserDetails /*userLogged={ props.userLogged}*/ />
 
-                <SidebarFastLinks /*userLogged={ props.userLogged} handleLogout={props.handleLogout}*/ />
+                <SidebarFastLinks history={history}/*userLogged={ props.userLogged} handleLogout={props.handleLogout}*/ />
 
                 <SidebarLinkList /*userLogged={ props.userLogged} userType={ props.userType}*/ />
              
@@ -35,7 +38,8 @@ const Sidebar = (props) => {
     )
     
 }
+
 Sidebar.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(Sidebar) 
+export default withStyles(styles)(withRouter(Sidebar))

@@ -119,7 +119,6 @@ class MainRouter extends Component {
                     //userType={ this.state.userType}
                     //handleLogout={this.handleLogout}
                 /> 
-      { /* SIMON: need to pass history to sidebar to use history.push when signing out */}
 
     </div>)
   }
