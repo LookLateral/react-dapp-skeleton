@@ -10,30 +10,68 @@ import auth from './../auth/auth-helper'
 import {Redirect} from 'react-router-dom'
 import {signin} from './api-auth.js'
 
+// SIMON: added
+import BackgroundLeft from '../assets/images/image-home-sx.jpg';
+import BannerContent from '../components/BannerContent';
+import Grid from 'material-ui/Grid'
+import { Link } from 'react-router-dom'
+
 const styles = theme => ({
+
+  root: { flexGrow: 1, marginTop: -150 },
   card: {
-    maxWidth: 600,
+    height: 'calc(100% - 150px)',
+    overflow: '',
+    marginTop: 150, 
+    padding: 0,
+    textAlign: 'center',
+    boxShadow: 'none',
+  },
+  cardContent1: {
+    padding: 0, paddingBottom: '0px !important',
+    backgroundImage: `radial-gradient( circle at top left, white, blue );`, 
+    backgroundSize: 'cover',
+    height: '100%',
+  },
+  cardContent2: { 
+    padding: 0, paddingBottom: '0px !important', height: '100%', 
+    backgroundImage: `url(${BackgroundLeft})`, backgroundSize: 'cover',
+  },
+  cardInner: {
+    maxWidth: '80%',
     margin: 'auto',
     textAlign: 'center',
     marginTop: theme.spacing.unit * 5,
     paddingBottom: theme.spacing.unit * 2
   },
-  error: {
-    verticalAlign: 'middle'
-  },
-  title: {
-    marginTop: theme.spacing.unit * 2,
-    color: theme.palette.openTitle
+  
+  spacer: { minHeight: 100, },
+  subtitle: {
+    fontSize: 36, marginBottom: 30,
+    color: 'rgb(0,0,0,0.9)',   
+    lineHeight: 1,
   },
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 300
+    width: '80%',
   },
-  submit: {
-    margin: 'auto',
-    marginBottom: theme.spacing.unit * 2
-  }
+  error: {
+    verticalAlign: 'middle'
+  },
+  fullBtn: {
+    fontSize: 15, marginTop:40,
+    borderStyle: 'solid', borderRadius: 4,
+    width: 150, padding: 15,
+  },
+  btnblu: {
+    backgroundColor: 'blue', color: '#fff', opacity: 0.9,
+  },
+  linkRegister: {
+    color: '#000',
+    fontWeight: 600,
+    fontSize: 25,
+  },
 })
 
 class Signin extends Component {
@@ -66,7 +104,7 @@ class Signin extends Component {
   }
 
   render() {
-    const {classes} = this.props
+    const {classes, mainState} = this.props
     const {from} = this.props.location.state || {
       from: {
         pathname: '/'
@@ -77,7 +115,7 @@ class Signin extends Component {
       return (<Redirect to={from}/>)
     }
 
-    return (
+    /*return (
       <Card className={classes.card}>
         <CardContent>
           <Typography type="headline" component="h2" className={classes.title}>
@@ -96,6 +134,62 @@ class Signin extends Component {
           <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
         </CardActions>
       </Card>
+    )*/
+
+    return (
+      <div className={classes.root}>
+
+        <Grid container spacing={0}>
+         
+         { /*SIMON: probably need to remove height prop later*/ }
+         <Grid item xs={12} sm={12} md={6} style={{ height: mainState.viewport.height + 'px'}}>
+             <Card className={classes.card}>           
+               <CardContent className={classes.cardContent1} >
+                 
+                 <div className={classes.spacer}></div>
+             
+                  <Card className={classes.cardInner}>
+                    <CardContent>
+
+                      <Typography type="headline" component="h2" className={classes.subtitle}>
+                          Sign In
+                        </Typography>
+                        <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
+                        <TextField id="password" type="password" label="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} margin="normal"/>
+                        <br/> {
+                          this.state.error && (<Typography component="p" color="error">
+                            <Icon color="error" className={classes.error}>error</Icon>
+                            {this.state.error}
+                          </Typography>)
+                        }
+                        <Button onClick={this.clickSubmit} className={classes.fullBtn+' '+classes.btnblu} >Submit</Button>
+                    
+                        <div style={{ marginTop: 40}}>
+                        <Link to="/signup" className={classes.linkRegister}>
+                          Not Registered?
+                        </Link>
+                        </div>   
+
+                    </CardContent>
+                  </Card>
+
+                </CardContent>
+                
+             </Card>
+         </Grid>
+        
+         <Grid item xs={12} sm={12} md={6}>
+             <Card className={classes.card}>           
+               <CardContent className={classes.cardContent2}>                  
+                 <BannerContent mainState={mainState} />       
+               </CardContent>
+             </Card>
+         </Grid>
+     
+     </Grid>
+
+
+      </div>
     )
   }
 }

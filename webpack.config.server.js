@@ -16,7 +16,7 @@ const config = {
     externals: [nodeExternals()],
     module: {
         rules: [
-            {
+            /*{
                 //test: /\.css$/,  
                 //include: /node_modules/,  
                 //use: ['style-loader', 'css-loader'],
@@ -26,7 +26,7 @@ const config = {
 
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
-            },
+            },*/
             {
                 test: /\.js$/,
                 exclude: /node_modules/,

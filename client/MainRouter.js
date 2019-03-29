@@ -91,7 +91,7 @@ class MainRouter extends Component {
         <Route exact path="/fimart" component={Fimart}/>
         <Route path="/users" component={Users}/>
         <Route path="/signup" component={Signup}/>
-        <Route path="/signin" component={Signin}/>
+        <Route path="/signin" render={(props) => <Signin mainState={this.state} {...props} /> } />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
         <Route path="/user/:userId" component={Profile}/>
 

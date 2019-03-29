@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-//import "react-responsive-carousel/lib/styles/carousel.min.css";
+//import "react-responsive-carousel/lib/styles/carousel.css";
 import { Carousel } from 'react-responsive-carousel';
 
 const styles = {
@@ -21,10 +21,7 @@ const properties = {
 
 const WPContent = (props) => {
   
-    const { classes } = props;
-    const { wpCategories } = props; 
-    const { mainState } = props; 
-    
+    const { classes, wpCategories, mainState } = props;     
     
     let categories = wpCategories.wpcategories.map ((category, index) => {       
       return <div key={index} style={{ height: mainState.viewport.height-260 }}> 
