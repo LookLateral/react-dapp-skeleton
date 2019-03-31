@@ -76,11 +76,11 @@ class Shop extends Component {
   }
 
   render() {
-    const logoUrl = this.state.shop._id
+    /*const logoUrl = this.state.shop._id
           ? `/api/shops/logo/${this.state.shop._id}?${new Date().getTime()}`
-          : '/api/shops/defaultphoto'
+          : '/api/shops/defaultphoto'*/
     const {classes} = this.props
-    return (<div className={classes.root}>
+    /*return (<div className={classes.root}>
       <Grid container spacing={24}>
         <Grid item xs={4} sm={4}>
           <Card className={classes.card}>
@@ -99,6 +99,17 @@ class Shop extends Component {
         <Grid item xs={8} sm={8}>
           <Card>
             <Typography type="title" component="h2" className={classes.productTitle}>Products</Typography>
+            <Products products={this.state.products} searched={false}/>
+          </Card>
+        </Grid>
+      </Grid>
+    </div>)*/
+
+    return (<div className={classes.root}>
+      <Grid container spacing={24}>
+        <Grid item xs={12} sm={12}>
+          <Card>
+            <Typography type="title" component="h2" className={classes.productTitle}>The art I own/I have owned</Typography>
             <Products products={this.state.products} searched={false}/>
           </Card>
         </Grid>
