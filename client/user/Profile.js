@@ -20,12 +20,12 @@ import MyOrders from './../order/MyOrders'
 
 const styles = theme => ({
   root: theme.mixins.gutters({
-    maxWidth: 600,
+    maxWidth: '90%',
     margin: 'auto',
     padding: theme.spacing.unit * 3,
     marginTop: theme.spacing.unit * 5
   }),
-  title: {
+  /*title: {
     margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
     color: theme.palette.protectedTitle
   },
@@ -35,7 +35,42 @@ const styles = theme => ({
   stripe_connected: {
     verticalAlign: 'super',
     marginRight: '10px'
-  }
+  },*/
+  bigAvatar: {
+    margin:20,
+    width: 120, height: 120,
+  },
+  bigPerson: {
+    width: 120, height: 120,
+  },
+  userName: {fontSize: 20, fontWeight: 600, },
+  userDetail: {fontSize: 20,},
+  fullBtn: {
+    fontSize: 12, marginTop:10,
+    borderStyle: 'solid', borderRadius: 4,
+    width: 120, padding: 5,
+  },
+  btnblu: {
+    backgroundColor: 'blue', color: '#fff', opacity: 0.9,
+  },
+  boxTopRight: {
+    width:300, height:400,
+    backgroundColor: 'pink', color: 'white', 
+    margin: 'auto', fontSize: 20,
+  },
+  tblTokenTdLeft: {
+    padding: 20,
+    borderLeft: '1px solid #dedede',
+    borderTop: '1px solid #dedede', borderBottom: '1px solid #dedede',
+    fontSize: 20,
+  },
+  tblTokenTdRight: {
+    padding: 20,
+    borderRight: '1px solid #dedede',
+    borderTop: '1px solid #dedede', borderBottom: '1px solid #dedede',
+    fontWeight: 600,
+    fontSize: 20,
+  },
 })
 
 class Profile extends Component {
@@ -71,7 +106,7 @@ class Profile extends Component {
     if (redirectToSignin) {
       return <Redirect to='/signin'/>
     }
-    return (
+    /*return (
       <Paper className={classes.root} elevation={4}>
         <Typography type="title" className={classes.title}>
           Profile
@@ -112,6 +147,65 @@ class Profile extends Component {
           </ListItem>
         </List>
         <MyOrders/>
+      </Paper>
+    )*/
+
+    return (
+      <Paper className={classes.root} elevation={4}>
+        <table style={{width:'100%'}}>
+          <tbody>
+            <tr style={{width:'100%'}}>
+              <td style={{width:'50%'}}>
+              
+              
+                  <table style={{width:'100%'}}>
+                    <tbody>
+                      <tr style={{width:'100%'}}>
+                        <td style={{width:'50%'}}>
+                          <Avatar className={classes.bigAvatar}>
+                            <Person className={classes.bigPerson}/>
+                          </Avatar>
+                        </td>
+                        <td style={{width:'50%'}}>               
+                          <div className={classes.userName}>{auth.isAuthenticated().user.name}</div>
+                          <div className={classes.userDetail}>Unverified User</div>
+                          <Link to={"/user/edit/" + this.state.user._id}>
+                            <Button className={classes.fullBtn+' '+classes.btnblu}>Edit Profile</Button>
+                          </Link>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>        
+                      
+
+                  <table style={{width:'90%', margin:'auto'}}>
+                    <tbody>
+                      <tr>
+                        <td className={classes.tblTokenTdLeft}>TOKEN HOLD</td>
+                        <td className={classes.tblTokenTdRight}>35425,4523</td>
+                      </tr>
+                      <tr>
+                        <td className={classes.tblTokenTdLeft}>HOLDING DAYS</td>
+                        <td className={classes.tblTokenTdRight}>10</td>
+                      </tr>
+                      <tr>
+                        <td className={classes.tblTokenTdLeft}>LOOK SCORE</td>
+                        <td className={classes.tblTokenTdRight}>354254,523</td>
+                      </tr>                    
+                    </tbody>
+                  </table>
+
+
+
+                      
+              </td>
+              
+              <td style={{width:'50%'}}>
+                <div className={classes.boxTopRight}>Thinking on using it for banners, calls to action or notifications..</div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </Paper>
     )
   }

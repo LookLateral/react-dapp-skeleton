@@ -20,20 +20,30 @@ const styles = {
         padding: '0 !important',
         minWidth: '0 !important',
         minHeight: '0 !important',
+        marginTop: '20px !important'
     },
     fastLinkImage: {
         margin: '0 8px',
-    }
+    },
+    fullBtn: {
+        fontSize: '15px !important', marginTop: '40px !important',
+        borderStyle: 'solid', borderRadius: '0px !important',
+        width: '100px !important', padding: '6px !important',
+        marginLeft: '20px !important',
+    },
+    btnblu: {
+        backgroundColor: 'blue !important', color: '#fff !important', opacity: 0.9,
+    },
 }
 
 const SidebarFastLink = (props) => {  
-    const { classes, history } = props; 
+    const { classes/*, history*/ } = props; 
 
     return (
         <div>
             { 
             //props.cognitoLogged ?  (
-            auth.isAuthenticated() && auth.isAuthenticated().user ? (
+            auth.isAuthenticated() && auth.isAuthenticated().user ? null /*(
                 
                 <div className={classes.fastLinkContainer}>       
                     <Link to={"/user/" + auth.isAuthenticated().user._id} className={classes.fastLink}>
@@ -50,7 +60,7 @@ const SidebarFastLink = (props) => {
                     }}><FontAwesomeIcon icon={['fas', 'sign-out-alt']}  className={classes.fastLinkImage} /></Button>
                 </div>
             
-            ) : (
+            )*/ : /* ( 
 
                 <div className="sidebar-fast-links">   
                     <Link to="/signin" className={classes.fastLink}>
@@ -59,6 +69,14 @@ const SidebarFastLink = (props) => {
                     <Link to="/search" className={classes.fastLink}>
                         <FontAwesomeIcon icon={['fas', 'search']}  className={classes.fastLinkImage} />
                     </Link>
+                </div>
+
+            ) */
+            (
+                <div className="fastLink">   
+                    <Link to="/signin">
+                        <Button className={classes.fullBtn+' '+classes.btnblu}>Sign In</Button>
+                    </Link>  
                 </div>
             )}
 

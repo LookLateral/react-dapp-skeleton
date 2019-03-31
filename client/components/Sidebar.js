@@ -9,7 +9,7 @@ import {withRouter} from 'react-router-dom'
 
 const styles = {
     sidebar: {
-        width: 200,
+        width: 250,
         height: 'calc(100% - 150px)',
         position: 'absolute',
         right: 0,
@@ -27,9 +27,9 @@ const Sidebar = (props) => {
         props.isOpen ?
         <div className={classes.sidebar}>
              
-                <SidebarUserDetails /*userLogged={ props.userLogged}*/ />
+                <SidebarUserDetails history={history} /*userLogged={ props.userLogged}*/ />
 
-                <SidebarFastLinks history={history}/*userLogged={ props.userLogged} handleLogout={props.handleLogout}*/ />
+                <SidebarFastLinks /*history={history}*/ /*userLogged={ props.userLogged} handleLogout={props.handleLogout}*/ />
 
                 <SidebarLinkList /*userLogged={ props.userLogged} userType={ props.userType}*/ />
              

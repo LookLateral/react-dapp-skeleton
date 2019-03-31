@@ -16,7 +16,7 @@ const SidebarLinkList = (props) => {
     return (
         <div className={classes.sidebarLinkList}>
             { //props.cognitoLogged && props.userType === 3 ?
-            auth.isAuthenticated() ?
+            auth.isAuthenticated() && 1==0 ?
                 <SidebarSingleLink 
                         name="SisAdmin Manager Art"
                         linkto="/admin-dashboard"
@@ -30,16 +30,13 @@ const SidebarLinkList = (props) => {
                 <div>
                     <SidebarSingleLink 
                         name="Member Dashboard"
-                        linkto="/"
-                        icon="home" />
+                        linkto={"/user/" + auth.isAuthenticated().user._id}
+                        icon="address-card" />
                     <SidebarSingleLink 
                         name="Discover Art"
                         linkto="/provenance"
                         icon="palette" />           
-                    <SidebarSingleLink 
-                        name="Profile"
-                        linkto={"/user/" + auth.isAuthenticated().user._id}
-                        icon="address-card" />
+                    
                 </div>
             :
                 null 
@@ -51,14 +48,18 @@ const SidebarLinkList = (props) => {
             <SidebarSingleLink 
                     name="About us"
                     linkto="/about-us"
-                    icon="fingerprint" />        
-            <SidebarSingleLink 
-                    name="Terms of service"
-                    linkto="/terms-of-service"
-                    icon="file-signature" />       
+                    icon="fingerprint" />
             <SidebarSingleLink 
                     name="Privacy Policy"
                     linkto="/privacy-policy"
+                    icon="fingerprint" />        
+            <SidebarSingleLink 
+                    name="Terms and Conditions"
+                    linkto="/terms-conditions"
+                    icon="file-signature" />       
+            <SidebarSingleLink 
+                    name="F.A.Q."
+                    linkto="/faq"
                     icon="gavel" />
         </div>
     )

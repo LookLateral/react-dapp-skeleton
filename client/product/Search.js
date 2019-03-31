@@ -110,6 +110,7 @@ class Search extends Component {
           <Button variant="raised" color={'primary'} className={classes.searchButton} onClick={this.search}>
             <SearchIcon/>
           </Button>
+          <div>MISSING FILTERS HERE</div>
           <Divider/>
           <Products products={this.state.results} searched={this.state.searched}/>
         </Card>

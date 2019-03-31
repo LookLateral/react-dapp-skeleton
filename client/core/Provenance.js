@@ -56,16 +56,19 @@ class Home extends Component {
             <Typography type="headline"
                         component="h2"
                         className={classes.title}>
-              FIMART
+              PROVENANCE
             </Typography>
         <Grid container spacing={24}>
-          <Grid item xs={8} sm={8}>
+          <Grid item xs={12} sm={12}>
             <Search categories={this.state.categories}/>
             <Categories categories={this.state.categories}/>
           </Grid>
+          
+          {/*
           <Grid item xs={4} sm={4}>
             <Suggestions products={this.state.suggestions} title={this.state.suggestionTitle}/>
           </Grid>
+          */}
         </Grid>
       </div>
     )
