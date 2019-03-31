@@ -18,13 +18,17 @@ import config from './../../config/config'
 import stripeButton from './../assets/images/stripeButton.png'
 import MyOrders from './../order/MyOrders'
 
+import {listByOwner} from '../shop/api-shop.js'
+
 const styles = theme => ({
   root: theme.mixins.gutters({
     maxWidth: '90%',
     margin: 'auto',
     padding: theme.spacing.unit * 3,
-    marginTop: theme.spacing.unit * 5
+    marginTop: theme.spacing.unit * 5,
+    marginBottom: theme.spacing.unit * 5,
   }),
+  blu: {color: 'blue',},
   /*title: {
     margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 2}px`,
     color: theme.palette.protectedTitle
@@ -36,6 +40,7 @@ const styles = theme => ({
     verticalAlign: 'super',
     marginRight: '10px'
   },*/
+  spacer: { minHeight: 100, },
   bigAvatar: {
     margin:20,
     width: 120, height: 120,
@@ -53,9 +58,15 @@ const styles = theme => ({
   btnblu: {
     backgroundColor: 'blue', color: '#fff', opacity: 0.9,
   },
+  btngreen: {
+    backgroundColor: 'green', color: '#fff', opacity: 0.9,
+  },
+  btnFloat: {
+    float: 'left', marginLeft: 20,
+  },
   boxTopRight: {
     width:300, height:400,
-    backgroundColor: 'pink', color: 'white', 
+    backgroundColor: 'pink', color: 'black', 
     margin: 'auto', fontSize: 20,
   },
   tblTokenTdLeft: {
@@ -71,6 +82,17 @@ const styles = theme => ({
     fontWeight: 600,
     fontSize: 20,
   },
+  section: {
+
+  },
+  sectionContainer: {
+    
+  },
+  sectionTitle: {
+    color: 'blue', fontSize: 22, marginLeft: 20, marginBottom: 10, fontWeight: 800,  },
+  sectionText: {
+    fontSize: 20, width: '75%', float: 'left',
+  },
 })
 
 class Profile extends Component {
@@ -78,6 +100,7 @@ class Profile extends Component {
     super()
     this.state = {
       user: '',
+      shopId: '',
       redirectToSignin: false
     }
     this.match = match
@@ -94,11 +117,27 @@ class Profile extends Component {
       }
     })
   }
+  loadShops = () => {
+    const jwt = auth.isAuthenticated()
+    listByOwner({
+      userId: jwt.user._id
+    }, {t: jwt.token}).then((data) => {
+      if (data.error) {
+        this.setState({redirectToSignin: true})
+      } else {
+        this.setState({shops: data})
+        data.map((shop, i) => {
+          this.setState({shopId: shop._id})
+        })      
+      }
+    })
+  }
   componentWillReceiveProps = (props) => {
     this.init(props.match.params.userId)
   }
   componentDidMount = () => {
     this.init(this.match.params.userId)
+    this.loadShops()
   }
   render() {
     const {classes} = this.props
@@ -155,8 +194,7 @@ class Profile extends Component {
         <table style={{width:'100%'}}>
           <tbody>
             <tr style={{width:'100%'}}>
-              <td style={{width:'50%'}}>
-              
+              <td style={{width:'50%'}}>         
               
                   <table style={{width:'100%'}}>
                     <tbody>
@@ -177,7 +215,6 @@ class Profile extends Component {
                     </tbody>
                   </table>        
                       
-
                   <table style={{width:'90%', margin:'auto'}}>
                     <tbody>
                       <tr>
@@ -194,10 +231,7 @@ class Profile extends Component {
                       </tr>                    
                     </tbody>
                   </table>
-
-
-
-                      
+                   
               </td>
               
               <td style={{width:'50%'}}>
@@ -206,7 +240,45 @@ class Profile extends Component {
             </tr>
           </tbody>
         </table>
+
+        <div className={classes.spacer}></div>
+
+        <div className={classes.section}>
+          <div className={classes.sectionTitle}>FIMART</div>
+          <div className={classes.sectionContainer}>
+            <div className={classes.sectionText}>Activating Fimart, you will be able to sell and buy artwork's fracts and manage your financials in the <span className={classes.blu}>MY FINANCIALS</span></div>
+            <Button className={classes.fullBtn+' '+classes.btngreen+' '+classes.btnFloat}>ACTIVATE NOW</Button>
+          </div>
+        </div>
+     
+        <div className={classes.spacer}></div>
+
+        <div className={classes.section}>
+          <div className={classes.sectionTitle}>MY ART</div>
+          <div className={classes.sectionContainer}>
+            <div className={classes.sectionText}>In this section lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <span className={classes.blu}>MY ART</span></div>
+            <Link to={"/shops/" + this.state.shopId}>
+              <Button className={classes.fullBtn+' '+classes.btnblu+' '+classes.btnFloat}>MY ART</Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className={classes.spacer}></div>
+
+        <div className={classes.section}>
+          <div className={classes.sectionTitle}>MY FINANCIALS</div>
+          <div className={classes.sectionContainer}>
+            <div className={classes.sectionText}>In this section lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <span className={classes.blu}>MY FINANCIALS</span></div>
+            <Link to="/my-financial">
+              <Button className={classes.fullBtn+' '+classes.btnblu+' '+classes.btnFloat}>MY FINANCIALS</Button>
+            </Link>
+          </div>
+        </div>
+
+        <div className={classes.spacer}></div>
+
       </Paper>
+      
     )
   }
 }
