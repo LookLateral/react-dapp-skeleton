@@ -9,7 +9,7 @@ import Signin from './auth/Signin'
 import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 //import MyArt from './product/MyProducts'
-//import MyFinancials from './user/MyFinancials'
+import MyFinancials from './user/MyFinancials'
 import PrivateRoute from './auth/PrivateRoute'
 import Menu from './core/Menu'
 import NewShop from './shop/NewShop'
@@ -95,7 +95,8 @@ class MainRouter extends Component {
         <Route path="/signup" render={(props) => <Signup mainState={this.state} {...props} /> }/>
         <Route path="/signin" render={(props) => <Signin mainState={this.state} {...props} /> } />
         <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
-        <Route path="/user/:userId" component={Profile}/>
+        <Route exact path="/user/:userId" component={Profile}/>
+        <Route path="/user/:userId/financials" component={MyFinancials}/>
         {/*
         <Route path="/my-art" component={MyArt}/>
         <Route path="/my-financials" component={MyFinancials}/>

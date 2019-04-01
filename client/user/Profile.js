@@ -269,7 +269,7 @@ class Profile extends Component {
           <div className={classes.sectionTitle}>MY FINANCIALS</div>
           <div className={classes.sectionContainer}>
             <div className={classes.sectionText}>In this section lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, <span className={classes.blu}>MY FINANCIALS</span></div>
-            <Link to="/my-financial">
+            <Link to={"/user/"+this.state.user._id+"/financials"}>
               <Button className={classes.fullBtn+' '+classes.btnblu+' '+classes.btnFloat}>MY FINANCIALS</Button>
             </Link>
           </div>
