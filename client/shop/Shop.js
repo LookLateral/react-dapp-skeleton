@@ -1,13 +1,16 @@
 import React, {Component} from 'react'
 import Card, {CardContent} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import Avatar from 'material-ui/Avatar'
+//import Avatar from 'material-ui/Avatar'
 import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {read} from './api-shop.js'
 import Products from './../product/Products'
 import {listByShop} from './../product/api-product.js'
+import Icon from 'material-ui/Icon'
+import {Link} from 'react-router-dom'
+import Button from 'material-ui/Button'
 
 const styles = theme => ({
   root: {
@@ -27,11 +30,18 @@ const styles = theme => ({
     marginTop: theme.spacing.unit,
     color: theme.palette.openTitle
   },
-  bigAvatar: {
+  addButton:{
+    float:'right',
+    marginRight: "40px"
+  },
+  leftIcon: {
+    marginRight: "8px"
+  },
+  /*bigAvatar: {
     width: 100,
     height: 100,
     margin: 'auto'
-  },
+  },*/
   productTitle: {
     padding:`${theme.spacing.unit * 3}px ${theme.spacing.unit * 2.5}px ${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
     color: theme.palette.openTitle,
@@ -109,7 +119,16 @@ class Shop extends Component {
       <Grid container spacing={24}>
         <Grid item xs={12} sm={12}>
           <Card>
-            <Typography type="title" component="h2" className={classes.productTitle}>The art I own/I have owned</Typography>
+            <Typography type="title" component="h2" className={classes.productTitle}>
+              The art I own
+              <span className={classes.addButton}>
+                <Link to={"/seller/"+this.match.params.shopId+"/products/new"}>
+                  <Button color="primary" variant="raised">
+                    <Icon className={classes.leftIcon}>add_box</Icon>  Upload Artwork
+                  </Button>
+                </Link>
+              </span>  
+            </Typography>
             <Products products={this.state.products} searched={false}/>
           </Card>
         </Grid>

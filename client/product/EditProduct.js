@@ -107,7 +107,8 @@ class EditProduct extends Component {
           ? `/api/product/image/${this.state.id}?${new Date().getTime()}`
           : '/api/product/defaultphoto'
     if (this.state.redirect) {
-      return (<Redirect to={'/seller/shop/edit/'+this.match.params.shopId}/>)
+      //return (<Redirect to={'/seller/shop/edit/'+this.match.params.shopId}/>)
+      return (<Redirect to={'/product/'+this.state.id}/>)
     }
     const {classes} = this.props
     return (<div>
@@ -146,7 +147,10 @@ class EditProduct extends Component {
         </CardContent>
         <CardActions>
           <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Update</Button>
-          <Link to={'/seller/shops/edit/'+this.match.params.shopId} className={classes.submit}><Button variant="raised">Cancel</Button></Link>
+          {/*<Link to={'/seller/shops/edit/'+this.match.params.shopId} className={classes.submit}>*/}
+          <Link to={'/product/'+this.state.id} className={classes.submit}>
+            <Button variant="raised">Cancel</Button>
+          </Link>
         </CardActions>
       </Card>
     </div>)

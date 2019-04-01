@@ -10,6 +10,11 @@ const ProductSchema = new mongoose.Schema({
     data: Buffer,
     contentType: String
   },
+  /*artist: {
+    type: String,
+    trim: true,
+    required: 'Name is required'
+  },*/
   description: {
     type: String,
     trim: true

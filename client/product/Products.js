@@ -50,7 +50,7 @@ const styles = theme => ({
 class Products extends Component {
   render() {
     const {classes} = this.props
-    /*return (
+    return (
       <div className={classes.root}>
       {this.props.products.length > 0 ?
         (<div className={classes.container}>
@@ -61,15 +61,15 @@ class Products extends Component {
               <GridListTileBar className={classes.tileBar}
                 title={<Link to={"/product/"+product._id} className={classes.tileTitle}>{product.name}</Link>}
                 subtitle={<span>$ {product.price}</span>}
-                actionIcon={
+                /*actionIcon={
                   <AddToCart item={product}/>
-                }
+                }*/
               />
             </GridListTile>
           ))}
         </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
-      </div>)*/
-      return (
+      </div>)
+      /*return (
         <div className={classes.root}>
         {this.props.products.length > 0 ?
           (<div className={classes.container}>
@@ -77,10 +77,14 @@ class Products extends Component {
             {this.props.products.map((product, i) => (
               <GridListTile key={i} className={classes.tile}>
                 <Link to={"/product/"+product._id}><img className={classes.image} src={'/api/product/image/'+product._id} alt={product.name} /></Link>
+                <Link to={"/product/"+product._id}>
+                  <div>{product.name}</div>
+                </Link>
               </GridListTile>
+              
             ))}
           </GridList></div>) : this.props.searched && (<Typography type="subheading" component="h4" className={classes.title}>No products found! :(</Typography>)}
-        </div>)
+        </div>)*/
   }
 }
 Products.propTypes = {
