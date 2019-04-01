@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
-import Card, {CardHeader, CardMedia, CardContent} from 'material-ui/Card'
+import Card, {/*CardHeader,*/ CardMedia, CardContent} from 'material-ui/Card'
 import Typography from 'material-ui/Typography'
-import Icon from 'material-ui/Icon'
+//import Icon from 'material-ui/Icon'
 import Grid from 'material-ui/Grid'
 import PropTypes from 'prop-types'
 import {withStyles} from 'material-ui/styles'
 import {read, listRelated} from './api-product.js'
 import {Link} from 'react-router-dom'
-import Suggestions from './../product/Suggestions'
-import AddToCart from './../cart/AddToCart'
+//import Suggestions from './../product/Suggestions'
+//import AddToCart from './../cart/AddToCart'
 import BackgroundLeft from '../assets/images/image-home-sx.jpg';
 import fractPic from '../assets/images/fractPic.png';
 import Button from 'material-ui/Button'
@@ -24,8 +24,12 @@ const styles = theme => ({
   card: {
     padding:'24px 40px 40px'
   },
+  card2:{
+    padding:'24px 40px 40px',
+    backgroundColor: '#efefef',
+    textAlign: 'center',
+  },
   subheading: {
-    //margin: '24px',
     color: theme.palette.openTitle,
     backgroundImage: `url(${BackgroundLeft})`, backgroundSize: 'cover',
     height: 400,
@@ -38,6 +42,12 @@ const styles = theme => ({
     width: '80%',
     height: 1,
     borderBottom: '1px solid #fff',
+    margin: '20px auto',
+  },
+  dividerGrey: {
+    width: '80%',
+    height: 1,
+    borderBottom: '1px solid #222',
     margin: '20px auto',
   },
   title: {
@@ -57,7 +67,6 @@ const styles = theme => ({
     width: 32,
     height: 32,
     marginRight: 5,
-    //backgroundImage: `url(${fractPic})`, backgroundSize: 'cover',
   },
   fractPerc: {
     fontSize: '3.0em',
@@ -69,7 +78,7 @@ const styles = theme => ({
     fontSize: '1.0em',
   },
   fullBtn: {
-    fontSize: 15, /*marginTop:40,*/
+    fontSize: 15,
     borderStyle: 'solid', borderRadius: 4,
     width: 150, padding: 10,
   },
@@ -79,11 +88,11 @@ const styles = theme => ({
   btngreen: {
     backgroundColor: 'green', color: '#fff', opacity: 0.9,
   },
-  btnpurple: {
-    backgroundColor: 'purple', color: '#fff', opacity: 0.9,
+  btnblu: {
+    backgroundColor: 'blue', color: '#fff', opacity: 0.9,
   },
   btnround: {
-    borderRadius: 16, /*width: 200, */
+    borderRadius: 16,
   },
   boxDetail: {
     float: 'left',
@@ -100,16 +109,21 @@ const styles = theme => ({
   textInfo: {
     fontSize: '1.3em',
   },
+  linkTutorial: {
+    color: 'black',
+    marginTop: 20,
+    fontSize: '1.3em',
+  },
   media: {
     height: 400,
     display: 'inline-block',
     width: '50%',
     marginLeft: '24px'
   },
-  icon: {
+  /*icon: {
     verticalAlign: 'sub'
   },
-  link:{
+link:{
     color: '#3e4c54b3',
     fontSize: '0.9em'
   },
@@ -123,7 +137,7 @@ const styles = theme => ({
   action: {
     margin: '8px 24px',
     display: 'inline-block'
-  }
+  }*/
 })
 
 class Product extends Component {
@@ -223,10 +237,10 @@ class Product extends Component {
                     <Grid item xs={7} sm={7} className={classes.boxDetail +' '+ classes.boxLeft}>
                       <div className={classes.titleInfo}>Artwork details</div>
                       <div className={classes.textInfo}>
-                        <span style={{fontWeight:'bold'}}>Size: </span> 192 by 83 by 33 cm.
+                        <span style={{fontWeight:'bold'}}>Size: </span> 192 by 83 by 33 cm.{/* SIMONOTE: html static */}
                       </div>
                       <div className={classes.textInfo}>
-                        <span style={{fontWeight:'bold'}}>Markings: </span> signed and numbered by David Lachapelle on verso.
+                        <span style={{fontWeight:'bold'}}>Markings: </span> signed and numbered by David Lachapelle on verso.{/* SIMONOTE: html static */}
                       </div>
                       <div className={classes.textInfo}>
                         <span style={{fontWeight:'bold'}}>Description: </span> {this.state.product.description}
@@ -234,7 +248,7 @@ class Product extends Component {
                     </Grid>
 
                     <Grid item xs={5} sm={5} className={classes.boxDetail}>
-                      <div className={classes.titleInfo}>Bio</div>
+                      <div className={classes.titleInfo}>Bio</div>{/* SIMONOTE: missing */}
                     </Grid>
                   </CardContent>
 
@@ -242,6 +256,7 @@ class Product extends Component {
 
               </Card>
             </Grid>
+            {/* SIMONOTE: do we keep suggestions? not in owner view, what in simple user view? */}
             {/*this.state.suggestions.length > 0 &&
               (<Grid item xs={5} sm={5}>
                 <Suggestions  products={this.state.suggestions} title='Related Products'/>
@@ -250,21 +265,33 @@ class Product extends Component {
 
           <Grid container spacing={40}>
             <Grid item xs={12} sm={12}>
-              <Card className={classes.card}> 
+              <Card className={classes.card2}> 
               
-                 {/* SIMONOTE: these buttons only if user=owner; also what path?? */}
-                 <Link to={"/"}>
-                    <Button 
-                        className={classes.fullBtn+' '+classes.btngreen+' '+classes.btnround} 
-                    >Ask TAG</Button>
-                  </Link>
+                 {/* SIMONOTE: these buttons only if user=owner; also what path?? and they are visible if the owner didn't request that */}
+                 <div style={{marginTop:20}}>
+                   <Link to={"/"}>{/* SIMONOTE: missing link */}
 
-                  <Link to={"/"}>
                     <Button 
-                        className={classes.fullBtn+' '+classes.btnpurple+' '+classes.btnround} 
-                    >TOKENIZE</Button>
-                  </Link>
-              
+                        className={classes.fullBtn+' '+classes.btngreen+' '+classes.btnround}>Ask TAG</Button>
+                    </Link>
+                  </div>
+                  <div style={{marginTop:10}}>
+                   <Link to={"/"} className={classes.linkTutorial}>{/* SIMONOTE: missing link */}
+                    <span style={{fontWeight:'bold'}}>Ask TAG:</span> click here for the how-to
+                    </Link>
+                  </div>
+                  <div className={classes.dividerGrey}></div>
+                  <div style={{marginTop:34}}>
+                    <Link to={"/"}>{/* SIMONOTE: missing link */}
+                      <Button 
+                        className={classes.fullBtn+' '+classes.btnblu+' '+classes.btnround}>TOKENIZE</Button>
+                    </Link>
+                  </div>
+                  <div style={{marginTop:10}}>
+                   <Link to={"/"} className={classes.linkTutorial}>{/* SIMONOTE: missing link */}
+                    <span style={{fontWeight:'bold'}}>TOKENIZE:</span> click here for the how-to
+                    </Link>
+                  </div>
               </Card>
             </Grid>
           </Grid>
