@@ -1,3 +1,4 @@
+{/* SIMONOTE: component deprecated */}
 import React, {Component} from 'react'
 import Card, {CardActions, CardContent} from 'material-ui/Card'
 import Button from 'material-ui/Button'

@@ -1,3 +1,4 @@
+{/* SIMONOTE: component deprecated */}
 import React, {Component} from 'react'
 import auth from './../auth/auth-helper'
 import Card, {CardActions, CardContent} from 'material-ui/Card'

@@ -1,3 +1,4 @@
+{/* SIMONOTE: need to style completely */}
 import React, {Component} from 'react'
 import Card, {CardActions, CardContent} from 'material-ui/Card'
 import Button from 'material-ui/Button'
@@ -52,7 +53,7 @@ class NewProduct extends Component {
       description: '',
       images: [],
       category: '',
-      //quantity: '',
+      quantity: '',
       price: '',
       redirect: false,
       error: ''
@@ -85,6 +86,8 @@ class NewProduct extends Component {
     })
   }
 
+  /* SIMONOTE: need to style this page completely */
+
   render() {
     if (this.state.redirect) {
       return (<Redirect to={'/shops/'+this.match.params.shopId}/>)
@@ -104,7 +107,7 @@ class NewProduct extends Component {
             </Button>
           </label> <span className={classes.filename}>{this.state.image ? this.state.image.name : ''}</span><br/>
           <TextField id="name" label="Name" className={classes.textField} value={this.state.name} onChange={this.handleChange('name')} margin="normal"/><br/>
-          <TextField id="name" label="Artist (not working)" className={classes.textField} value={this.state.artist} onChange={this.handleChange('artist')} margin="normal"/><br/>
+          <TextField id="name" label="Artist (not working)" className={classes.textField} value={this.state.artist} onChange={this.handleChange('artist')} margin="normal"/><br/>{/* SIMONOTE: not working, need to change product model */}
           <TextField
             id="multiline-flexible"
             label="Description" 
@@ -116,7 +119,7 @@ class NewProduct extends Component {
             margin="normal"
           /><br/>
           <TextField id="category" label="Category" className={classes.textField} value={this.state.category} onChange={this.handleChange('category')} margin="normal"/><br/>
-          <TextField id="quantity" label="Quantity (field to be removed)" className={classes.textField} value={this.state.quantity} onChange={this.handleChange('quantity')} type="number" margin="normal"/><br/>
+          <TextField id="quantity" label="Quantity (field to be removed)" className={classes.textField} value={this.state.quantity} onChange={this.handleChange('quantity')} type="number" margin="normal"/><br/>{/* SIMONOTE: to be removed */}
           <TextField id="price" label="Price" className={classes.textField} value={this.state.price} onChange={this.handleChange('price')} type="number" margin="normal"/><br/>
           {
             this.state.error && (<Typography component="p" color="error">
