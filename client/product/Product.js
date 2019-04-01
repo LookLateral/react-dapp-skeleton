@@ -120,7 +120,7 @@ const styles = theme => ({
     width: '50%',
     marginLeft: '24px'
   },
-  /*icon: {
+/*icon: {
     verticalAlign: 'sub'
   },
 link:{

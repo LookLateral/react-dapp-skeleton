@@ -86,8 +86,6 @@ class NewProduct extends Component {
     })
   }
 
-  /* SIMONOTE: need to style this page completely */
-
   render() {
     if (this.state.redirect) {
       return (<Redirect to={'/shops/'+this.match.params.shopId}/>)

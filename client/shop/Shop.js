@@ -47,7 +47,11 @@ const styles = theme => ({
     color: theme.palette.openTitle,
     width: '100%',
     fontSize: '1.2em'
-  }
+  },
+  divider: {
+    height: 40,
+    clear: 'both',
+  },
 })
 
 class Shop extends Component {
@@ -129,6 +133,7 @@ class Shop extends Component {
                 </Link>
               </span>  
             </Typography>
+            <div className={classes.divider}></div>
             <Products products={this.state.products} searched={false}/>
           </Card>
         </Grid>
