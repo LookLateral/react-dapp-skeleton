@@ -20,6 +20,7 @@ import EditShop from './shop/EditShop'
 import NewProduct from './product/NewProduct'
 import EditProduct from './product/EditProduct'
 import Product from './product/Product'
+import Tokenize from './product/Tokenize'
 import Cart from './cart/Cart'
 import StripeConnect from './user/StripeConnect'
 import ShopOrders from './order/ShopOrders'
@@ -102,7 +103,8 @@ class MainRouter extends Component {
         <Route path="/my-financials" component={MyFinancials}/>
         */}
         <Route path="/cart" component={Cart}/>
-        <Route path="/product/:productId" component={Product}/>
+        <Route exact path="/product/:productId" component={Product}/>
+        <Route path="/product/:productId/tokenize" component={Tokenize}/>
         <Route path="/shops/all" component={Shops}/>
         <Route path="/shops/:shopId" component={Shop}/>
 

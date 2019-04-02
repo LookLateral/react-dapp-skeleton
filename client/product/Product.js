@@ -287,7 +287,7 @@ class Product extends Component {
                   </div>
                   <div className={classes.dividerGrey}></div>
                   <div style={{marginTop:34}}>
-                    <Link to={"/"}>{/* SIMONOTE: missing link */}
+                    <Link to={"/product/" + this.state.product._id + "/tokenize"}>
                       <Button 
                         className={classes.fullBtn+' '+classes.btnblu+' '+classes.btnround}>TOKENIZE</Button>
                     </Link>
