@@ -6,46 +6,68 @@ const bip39 = require('bip39')
 const seed = bip39.mnemonicToSeed('seedPhrase').slice(0,32)
 const alice = new BigchainDB.Ed25519Keypair(seed)
 
+
+/* SIMONOTES: 
+to fix: define what is painting ()*/
+
+
 let painting = {
     productId:'',
     name: '',
-    //author: 'Diego Rodríguez de Silva y Velázquez',
+    //author: '',
     owner: '',
-    tokenqty: ''
 }
-/*let metadata = {
+/*let metaPainting = {
     value_eur:'',
     value_btc: '',
 }*/
 
-// SIMON: get params and set painting, then create
-/*function initPainting(_productId, _name, _owner, _tokenqty, _value_eur, _value_btc){ 
+
+let tokenization = {
+    productId:'',
+    name: '',
+    owner: '',
+    tokenqty: '',
+}
+/*let metaTokenization = {
+    value_eur:'',
+    value_btc: '',
+}*/
+
+
+const initPaintingForUpload = (_productId, _name, _owner, _tokenqty/*, _value_eur, _value_btc*/) => {  
     painting.productId = _productId;
     painting.name = _name;
     //painting.author = _author;
     painting.owner = _owner;
     painting.tokenqty = _tokenqty;
-
-    metadata.value.value_eur = _value_eur;
-    metadata.value.value_btc = _value_btc;
-
+    //metaPainting.value_eur = _value_eur;
+    //metaPainting.value_btc = _value_btc;
     createPaint();
-}
-*/
+
+  }
+const initTokanization = (_productId, _name, _owner, _tokenqty/*, _value_eur, _value_btc*/) => {   
+    tokenization.productId = _productId;
+    tokenization.name = _name;
+    tokenization.owner = _owner;
+    tokenization.tokenqty = _tokenqty;
+    //metaTokenization.value_eur = _value_eur;
+    // metaTokenization.value_btc = _value_btc;
+    tokenLaunch();
+  }
+
+
+
 
 function createPaint() {
-    // Construct a transaction payload
     const txCreatePaint = BigchainDB.Transaction.makeCreateTransaction(
-        // Asset field
         {
             painting,
         },
-        // Metadata field, contains information about the transaction itself (can be `null` if not needed)
         {
             datetime: new Date().toString(),
-            //metadata
+            //metaPainting
         },
-        // Output. For this case we create a simple Ed25519 condition
         [BigchainDB.Transaction.makeOutput(
             BigchainDB.Transaction.makeEd25519Condition(alice.publicKey))],
         // Issuers
@@ -63,7 +85,6 @@ function createPaint() {
             // txSigned.id corresponds to the asset id of the painting
         })
 }
-
 
 function transferOwnership(txCreatedID, newOwner) {
     // Get transaction payload by ID
@@ -98,25 +119,46 @@ function transferOwnership(txCreatedID, newOwner) {
         })
 }
 
+const nTokens = 10000
+let tokensLeft
+const tokenCreator = new BigchainDB.Ed25519Keypair(bip39.mnemonicToSeed('seedPhrase').slice(0,32))
+let createTxId
+
+function tokenLaunch() {
+    // Construct a transaction payload
+    const tx = BigchainDB.Transaction.makeCreateTransaction({
+            token: '',
+            number_tokens: nTokens
+        },
+        // Metadata field, contains information about the transaction itself
+        // (can be `null` if not needed)
+        {
+            datetime: new Date().toString()
+        },
+        // Output: Divisible asset, include nTokens as parameter
+        [BigchainDB.Transaction.makeOutput(BigchainDB.Transaction
+          .makeEd25519Condition(tokenCreator.publicKey), nTokens.toString())],
+        tokenCreator.publicKey
+    )
+
+    // Sign the transaction with the private key of the token creator
+    const txSigned = BigchainDB.Transaction
+      .signTransaction(tx, tokenCreator.privateKey)
+
+    // Send the transaction off to BigchainDB
+    conn.postTransactionCommit(txSigned)
+        .then(res => {
+            createTxId = res.id
+            tokensLeft = nTokens
+            document.body.innerHTML ='<h3>Transaction created</h3>';
+            // txSigned.id corresponds to the asset id of the tokens
+            document.body.innerHTML +=txSigned.id
+        })
+}
 
 
-//module.exports = initPainting
-
-const initPainting = (_productId, _name, _owner, _tokenqty/*, _value_eur, _value_btc*/) => {
-    
-    painting.productId = _productId;
-    painting.name = _name;
-    //painting.author = _author;
-    painting.owner = _owner;
-    painting.tokenqty = _tokenqty;
-
-    //metadata.value_eur = _value_eur;
-   // metadata.value_btc = _value_btc;
-
-    createPaint();
-
-  }
   
   export {
-    initPainting
+    initPaintingForUpload,
+    initTokanization
   }
