@@ -54,14 +54,14 @@ const styles = {
     height: '100%',
   },
   cardContent2: { padding: 0, paddingBottom: '0px !important', height: '100%', },
-  spacer: { minHeight: 100, },
+  spacer: { minHeight: 80, },
   subtitle: {
-    fontSize: 36, marginBottom: 30,
+    fontSize: '2.0em', marginBottom: 30,
     color: 'rgb(255,255,255,0.9)',   
     lineHeight: 1,
   },
   textNormal: {
-    fontSize: 24, marginBottom: 30, fontWeight: 600,
+    fontSize: '1.5em', marginBottom: 20, fontWeight: 600,
   },
   blu: {
     color: '#0000FF',   
@@ -76,9 +76,9 @@ const styles = {
     borderStyle: 'solid', borderColor: '#fff', borderRadius: 4, border: 2,
   },*/
   fullBtn: {
-    fontSize: 15, marginTop:40,
+    fontSize: '0.8em', marginTop:20,
     borderStyle: 'solid', borderRadius: 4,
-    width: 150, padding: 15,
+    width: 120, padding: 6,
   },
   btnpurple: {
     backgroundColor: 'purple', color: '#fff', opacity: 0.9,
@@ -90,13 +90,13 @@ const styles = {
     backgroundColor: 'green', color: '#fff', opacity: 0.9,
   },
   btnround: {
-    borderRadius: 16, width: 200, 
+    borderRadius: 16, width: 150, 
   },
   linkTandC: {
     color: '#bbb5b5',
     textDecoration: 'underline',
     fontStyle: 'italic',
-    fontSize: 20,
+    fontSize: '1.0em',
   },
 }
 
@@ -187,7 +187,7 @@ class Home extends Component {
                   }         
 
 
-                  <div style={{ marginTop: 40}}>
+                  <div style={{ marginTop: 30}}>
                   <Link to="/terms-conditions" className={classes.linkTandC}>
                     Terms and conditions
                   </Link>

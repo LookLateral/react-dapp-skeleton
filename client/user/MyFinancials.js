@@ -12,7 +12,7 @@ import MyOrders from './../order/MyOrders'
 
 import {listByOwner} from '../shop/api-shop.js'
 import {listByShop} from '../product/api-product.js'
-import Products from './../product/Products'
+import Fracts from './../fract/Fracts'
 
 
 const styles = theme => ({
@@ -24,6 +24,7 @@ const styles = theme => ({
     marginBottom: theme.spacing.unit * 5,
   }),
   spacer: { minHeight: 100, clear:'both', },
+  smallSpacer: { minHeight: 50, clear:'both', },
   blu: {color: 'blue',},
   fullBtn: {
     fontSize: 12, marginTop:10,
@@ -85,10 +86,20 @@ const styles = theme => ({
       fontSize: '1.5em',
       marginLeft: '30px',
   },
+  
+  // tbl financials
   tdTitle: { color: 'blue',},
   tdRow0: {backgroundColor: '#ddd',},
   tdLeft: { width: '40%',  height:30, paddingLeft:'3%', fontSize: '1.2em', borderRight: '1px solid #bbb',},
   tdRight: { width: '60%',height:30, paddingLeft:'3%', fontSize: '1.2em',},
+
+  // tbl transactions
+  tdSmall: {width:10,},
+  tdHeader: {fontWeight:'bold',textAlign:'center', border: '1px solid #ddd', padding: '12px 0', fontSize:'1.2em',},
+  tdText: {textAlign:'center', border: '1px solid #ddd', padding: '12px 0', fontSize:'1.2em',},
+  tdRed: {backgroundColor:'red'},
+  tdGreen: {backgroundColor:'green'},
+  tdGrey: {backgroundColor:'rgb(0,0,0,0.05)'},
 
 })
 
@@ -162,7 +173,17 @@ class MyFinancials extends Component {
 
       <Paper className={classes.root} elevation={4}>
         
-        <div className={classes.section}>
+        <div className={classes.section}>         
+
+          <div className={classes.section}>
+            <div className={classes.sectionTitle}>FIMART</div>
+            <div className={classes.sectionContainer}>
+              <div className={classes.sectionText}>Activating Fimart, you will be able to sell and buy artwork's fracts and manage your financials in the <span className={classes.blu}>MY FINANCIALS</span></div>
+              <Button className={classes.fullBtn+' '+classes.btngreen+' '+classes.btnFloat}>ACTIVATE NOW</Button>
+            </div>
+          </div>
+
+          <div className={classes.spacer}></div>
           
           <div className={classes.sectionTitle}>PAYMENT</div>
           
@@ -202,11 +223,11 @@ class MyFinancials extends Component {
             <tbody>
                 <tr style={{width:'100%'}}>
                     <td className={classes.tdRow0+' '+classes.tdTitle+' '+classes.tdLeft}>N° Artworks</td>
-                    <td className={classes.tdRow0+' '+classes.tdTitle+' '+classes.tdRight}>2</td>
+                    <td className={classes.tdRow0+' '+classes.tdTitle+' '+classes.tdRight}>5</td>
                 </tr>
                 <tr style={{width:'100%'}}>
                     <td className={classes.tdRow1+' '+classes.tdLeft}>Total USD value</td>
-                    <td className={classes.tdRow1+' '+classes.tdRight}>6784.65</td>
+                    <td className={classes.tdRow1+' '+classes.tdRight}>36784.65</td>
                 </tr>
                 <tr style={{width:'100%'}}>
                     <td className={classes.tdRow0+' '+classes.tdLeft}>Total Loyalty Points</td>
@@ -221,12 +242,72 @@ class MyFinancials extends Component {
 
         </div>
 
+        <div className={classes.smallSpacer}></div>
+
+        {/* SIMONOTES: 
+        need to make this Fracts instead of products.
+        Products are artworks listed in MyArt, i'm the owner and can add provenance etc etc
+        in fract there will be 2 buttons: sell fracts you own, buy available fracts */}
+        <Fracts products={this.state.products} searched={false}/>
+
+
         <div className={classes.spacer}></div>
 
-        <Products products={this.state.products} searched={false}/>
+        <div className={classes.section}>
+          <div className={classes.sectionTitle}>TRANSACTIONS HISTORY</div>
+          
+          <div style={{width:'100%', float:'left'}}>
+            <table style={{width:'100%'}}>
+            <tbody>
+            <tr style={{width:'100%'}}>
+                    <td className={classes.tdSmall}></td>
+                    <td className={classes.tdHeader}>USD</td>
+                    <td className={classes.tdHeader}>LOOKS</td>
+                    <td className={classes.tdHeader}>Date</td>
+                    <td className={classes.tdHeader}>Type</td>
+                    <td className={classes.tdHeader}>Title Artwork</td>
+                </tr>
+                <tr style={{width:'100%'}}>
+                    <td className={classes.tdSmall+' '+classes.tdRed}></td>
+                    <td className={classes.tdText}>226.14</td>
+                    <td className={classes.tdText}>2446.10801</td>
+                    <td className={classes.tdText}>12 Mar</td>
+                    <td className={classes.tdText}>2% Fraction</td>
+                    <td className={classes.tdText}>
+                      <div>Lewitt Sol</div>
+                      <div>Complex forms</div>
+                    </td>
+                </tr>
+                <tr style={{width:'100%'}}>
+                    <td className={classes.tdSmall+' '+classes.tdGreen}></td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>558.44</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>60941.38114</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>12 Feb</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>5% Fraction</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>
+                      <div>Lewitt Sol</div>
+                      <div>Complex forms</div>
+                    </td>
+                </tr>
+                <tr style={{width:'100%'}}>
+                    <td className={classes.tdSmall+' '+classes.tdGreen}></td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>3764.25</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>29159.36447</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>3 Feb</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>27% Fraction</td>
+                    <td className={classes.tdText+' '+classes.tdGrey}>
+                      <div>Lewitt Sol</div>
+                      <div>Complex forms</div>
+                    </td>
+                </tr>
+            </tbody>
+            </table>
+          </div>
 
+        </div>
 
         <div className={classes.spacer}></div>
+
       </Paper>
       
     )
