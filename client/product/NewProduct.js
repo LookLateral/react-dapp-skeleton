@@ -82,6 +82,14 @@ class NewProduct extends Component {
         this.setState({error: data.error})
       } else {
         this.setState({error: '', redirect: true})
+        const jwt = auth.isAuthenticated()
+        
+        /* SIMONOTES: 
+        need to call here initPaintingForUpload() to write to bigchain!!
+        also, need to get back txSigned.id and write it to mongodb
+        
+        how to write on mongo? do we need transaction.model and transaction.controller?
+        */
       }
     })
   }

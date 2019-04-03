@@ -1,3 +1,5 @@
+// SIMONOTES: to be removed, these lines where added in /client/config/config.js
+
 const bip39 = require("bip39");
  
 const config = {

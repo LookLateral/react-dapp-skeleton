@@ -29,6 +29,20 @@ const UserSchema = new mongoose.Schema({
   },
   stripe_seller: {},
   stripe_customer: {}
+
+  /*
+  SIMONOTES: need to add
+  publicKey,
+  privateKey,
+  full registration fields (address, phone, )
+  flag fully registered
+  flag verified,
+  flag gallery,
+  flag admin,
+  flag fimart active,
+
+  ...to be continued...
+  */
 })
 
 UserSchema

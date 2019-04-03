@@ -13,7 +13,7 @@ const ProductSchema = new mongoose.Schema({
   /*artist: {
     type: String,
     trim: true,
-    required: 'Name is required'
+    required: 'Artist is required'
   },*/
   description: {
     type: String,
@@ -36,6 +36,19 @@ const ProductSchema = new mongoose.Schema({
     default: Date.now
   },
   shop: {type: mongoose.Schema.ObjectId, ref: 'Shop'}
+  
+  /*
+  SIMONOTES: need to add
+  productId,
+  owner (is it enough the shop?),
+  artist,
+  size,
+  flag on sale,
+  flag tokenized,
+  price usd and price_btc instead of price?
+  
+  ...to be continued...
+  */
 })
 
 export default mongoose.model('Product', ProductSchema)

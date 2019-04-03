@@ -82,6 +82,8 @@ class Signup extends Component {
       email: '',
       open: false,
       error: ''
+
+      // SIMONOTES: decide if in here these fields are enough or if we need all user fields (not requiring them)
   }
 
   handleChange = name => event => {

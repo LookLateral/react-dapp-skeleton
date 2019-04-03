@@ -52,6 +52,8 @@ class EditProfile extends Component {
       seller: false,
       redirectToProfile: false,
       error: ''
+
+      // SIMONOTES: fix with all missing user fields
     }
     this.match = match
   }
